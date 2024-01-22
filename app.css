@@ -1,7 +1,24 @@
+body {
+    background-color: #192a51;
+}
+
+h1 {
+    color: #ffffff;
+}
+
 #game div {
     border: 1px solid black;
+    background-color: #d2c9af;
     width: 15%;
     height: 200px;
     margin: 10px;
     display: inline-block;
-  }
+    overflow: hidden; /* Prevents the image from overflowing the div */
+}
+
+#game div img {
+    max-width: 125%; 
+    max-height: 125%;
+    object-fit: cover;
+    height: 200px;
+}
