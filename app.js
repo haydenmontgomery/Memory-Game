@@ -2,6 +2,13 @@ const gameContainer = document.getElementById("game");
 const timeDiv = document.getElementById("time");
 const fastestTimeDiv = document.getElementById("fastest-time");
 
+let previousCard;
+//ID assignment when creating div
+let newID = 1;
+//Our boolean to check if we can click e.g. enough time has passed
+let canClick = true;
+let isPair = false;
+
 
 let fastestTime = 0;
 if (localStorage.getItem('isScore')){
@@ -12,7 +19,6 @@ let time = 0;
 const intervalID = setInterval(function() {
     time += 1;
     timeDiv.innerText = `Time: ${time}`;
-    console.log(time);
 }, 1000);
 
 //Array of our gifs to use as cards
@@ -66,6 +72,9 @@ function divCreation(shuffledArray){
         newDiv.classList.add(img);
         console.log(newDiv.classList);
 
+        //Add id to div. This will be used to check if we clicked the same card or not. NO CHEATING!
+        newDiv.setAttribute("id", newID);
+
         //Allow them to be clicked
         newDiv.addEventListener("click", handleCardClick);
 
@@ -74,16 +83,28 @@ function divCreation(shuffledArray){
 
         //append div to game
         gameContainer.append(newDiv);
+        newID++
     }
 }
 
 function handleCardClick(e){
-    console.log("You clicked", e.target);
-    var image = e.target.querySelector("img")
-    var divClass = e.target.classList.value;
-    console.log(divClass + "This is divclass");
+    //Check if we are allowed to click
+    if(canClick === true){
+        canClick = false;
+        previousCard = e.target.id;
+        console.log(previousCard);
+        //console.log("You clicked", e.target);
+        const image = e.target.querySelector("img")
+        if (image !== null){
+            const divClass = e.target.classList.value;
+            console.log(divClass + "This is divclass");
 
-    image.src = divClass;
+            image.src = divClass;
+        }
+        setTimeout(function(){
+            canClick = true;
+        }, 100);
+    }
 
 }
 
