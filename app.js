@@ -1,6 +1,21 @@
 const gameContainer = document.getElementById("game");
-let score = 0;
+const timeDiv = document.getElementById("time");
+const fastestTimeDiv = document.getElementById("fastest-time");
 
+
+let fastestTime = 0;
+if (localStorage.getItem('isScore')){
+    fastestTime = localStorage.getItem("isScore");
+}
+//start score counter
+let time = 0;
+const intervalID = setInterval(function() {
+    time += 1;
+    timeDiv.innerText = `Time: ${time}`;
+    console.log(time);
+}, 1000);
+
+//Array of our gifs to use as cards
 const imgArray = [
     "https://media.giphy.com/media/QAsBwSjx9zVKoGp9nr/giphy.gif",
     "https://media.giphy.com/media/6pJNYBYSMFod2/giphy.gif",
@@ -72,4 +87,6 @@ function handleCardClick(e){
 
 }
 
+
+//Display score and time
 divCreation(shuffledImages);
