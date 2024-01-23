@@ -6,8 +6,7 @@ const fastestTimeDiv = document.getElementById("fastest-time");
 let finish = 0;
 
 let previousCard;
-//ID assignment when creating div
-let newID = 1;
+
 //Our boolean to check if we can click e.g. enough time has passed
 let canClick = true;
 let isPair = false;
@@ -76,8 +75,6 @@ function divCreation(shuffledArray){
         newDiv.classList.add(img);
         console.log(newDiv.classList);
 
-        //Add id to div. This will be used to check if we clicked the same card or not. NO CHEATING!
-        newDiv.setAttribute("id", newID);
 
         //Allow them to be clicked
         newDiv.addEventListener("click", handleCardClick);
@@ -87,7 +84,6 @@ function divCreation(shuffledArray){
 
         //append div to game
         gameContainer.append(newDiv);
-        newID++
     }
 }
 
