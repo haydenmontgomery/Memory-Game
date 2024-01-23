@@ -2,6 +2,7 @@ const gameContainer = document.getElementById("game");
 const timeDiv = document.getElementById("time");
 const fastestTimeDiv = document.getElementById("fastest-time");
 
+//Value used to increment. Game ends if finish == 5
 let finish = 0;
 
 let previousCard;
@@ -11,7 +12,7 @@ let newID = 1;
 let canClick = true;
 let isPair = false;
 
-
+console.log(localStorage.getItem('isScore'));
 let fastestTime = 0;
 if (localStorage.getItem('isScore')){
     fastestTime = localStorage.getItem("isScore");
@@ -111,31 +112,33 @@ function handleCardClick(e){
                     //Check if we won
                     if (finish == 5){
                         //Checks for a high score
-                        if(fastestTime < time){
-                            alert(`You finished in ${time} seconds! That's a high score!`);
-                            localStorage.setItem("isScore", fastestTime);
+                        if(fastestTime > time){
+                            //set new fastest time, end game.
+                            localStorage.setItem("isScore", time);
                             canClick = false;
-                            return;
+                            fastestTimeDiv.innerText = `Fastest Time: ${fastestTime}`;
+                            setTimeout(function(){
+                                alert(`You finished in ${time} seconds! That's a high score!`);
+                            },10);
+                            
                         } else{
                             alert(`You finished in ${time} seconds!`);
                             canClick = false;
-                            return;
                         }
                         
                         
                     }
                     canClick = true;
                 } else {
-                        setTimeout(function(){
+                    //Give two seconds to see the images before clearing them
+                    setTimeout(function(){
                         const prevImage = previousCard.querySelector("img");
                         clearImage(image);
                         clearImage(prevImage);
-                        //canClick = true;
                         previousCard = undefined;
-                        console.log(canClick);
                         setTimeout(function(){
                             canClick = true;
-                        }, 75);
+                            }, 75);
                         }, 2000);
                     }
                 } else {
@@ -156,6 +159,8 @@ console.log(canClick);
 
 //Display score and time
 divCreation(shuffledImages);
+
+//Clear image function;
 function clearImage(image){
     console.log(image);
     image.src = "";
