@@ -115,7 +115,7 @@ function handleCardClick(e){
                             fastestTimeDiv.innerText = `Fastest Time: ${fastestTime}`;
                             setTimeout(function(){
                                 alert(`You finished in ${time} seconds! That's a high score!`);
-                            },10);
+                            },100);
                             
                         } else{
                             alert(`You finished in ${time} seconds!`);
