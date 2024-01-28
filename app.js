@@ -14,7 +14,8 @@ let isPair = false;
 console.log(localStorage.getItem('isScore'));
 let fastestTime = 0;
 if (localStorage.getItem('isScore')){
-    fastestTime = localStorage.getItem("isScore");
+    fastestTime = parseInt(localStorage.getItem("isScore"));
+    console.log(fastestTime + "Is this an int? " + typeof fastestTime);
     fastestTimeDiv.innerText = `Fastest Time: ${fastestTime}`;
 }
 //start score counter
